@@ -22,8 +22,21 @@ export default class Search extends Component {
   }
 
   onPriceInputChange = (name, value) => {
-    console.log(name,value)
     this.setState({[name]:value});
+    if(name === "priceFrom" && this.state.priceTo === ""){
+      this.setState({priceTo:Infinity});
+    }
+    if(name === "priceTo" && this.state.priceFrom === ""){
+      this.setState({priceFrom:-Infinity});
+    }
+
+    if(value === "" && name === "priceFrom"){
+      this.setState({priceFrom:-Infinity});
+    }
+
+    if(value === "" && name === "priceTo"){
+      this.setState({priceTo:Infinity});
+    }
   }
 
   filterProducts = () => {
