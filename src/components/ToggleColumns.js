@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 
 export default class ToggleColumns extends Component {
-  onCheckboxClick = (e) => {
-    // to-do: implement checkbox click handler
-  }
+
   
   render() {
     return (

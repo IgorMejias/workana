@@ -9,8 +9,8 @@ export default class Search extends Component {
     super(props);
 
     this.state = {
-      priceFrom: 0,
-      priceTo: Infinity,
+      priceFrom: "",
+      priceTo: "",
       columns: {
         id: false,
         name: false,
@@ -21,16 +21,9 @@ export default class Search extends Component {
     };
   }
 
-  onPriceInputChange = (e) => {
-    let {name, value} = e.target;
+  onPriceInputChange = (name, value) => {
+    console.log(name,value)
     this.setState({[name]:value});
-    if(value === "" && name === "priceFrom"){
-      this.setState({priceFrom:-Infinity});
-    }
-
-    if(value === "" && name === "priceTo"){
-      this.setState({priceTo:Infinity});
-    }
   }
 
   filterProducts = () => {
@@ -39,6 +32,23 @@ export default class Search extends Component {
     this.state.priceTo === this.state.priceFrom ?
     newArray = this.props.products.filter(item=>item.price === parseFloat(this.state.priceFrom)):
     newArray = this.props.products.filter(item=>item.price <= parseFloat(this.state.priceTo) && item.price >= parseFloat(this.state.priceFrom));
+    
+    if(this.state.priceFrom === "0" && this.state.priceTo === "0"){
+      newArray = this.props.products;
+    }
+
+    if(this.state.priceFrom === 0 && this.state.priceTo === 0){
+      newArray = this.props.products;
+    }
+
+    if(this.state.priceFrom === "" && this.state.priceTo === ""){
+      newArray = this.props.products;
+    }
+
+    if(parseFloat(this.state.priceFrom) > parseFloat(this.state.priceTo)){
+      newArray = this.props.products;
+    }
+
     newArray.sort((a,b)=> a.price - b.price);
     return newArray;
   }
@@ -58,6 +68,8 @@ export default class Search extends Component {
     return (
       <div className="Products">
         <FilterForm
+          priceFrom={this.state.priceFrom}
+          priceTo={this.state.priceTo}
           onPriceInputChange={this.onPriceInputChange}
           columns={this.state.columns} />
 
