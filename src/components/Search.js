@@ -12,11 +12,11 @@ export default class Search extends Component {
       priceFrom: "",
       priceTo: "",
       columns: {
-        id: false,
-        name: false,
-        department: false,
-        currency: false,
-        price: false
+        id: true,
+        name: true,
+        department: true,
+        currency: true,
+        price: true
       }
     };
   }
