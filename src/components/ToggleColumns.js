@@ -17,7 +17,8 @@ export default class ToggleColumns extends Component {
               <input
                 onInput={this.props.onCheckboxClick}
                 type="checkbox"
-                name={column} />
+                name={column}
+                defaultChecked={this.props.columns[column]} />
             </div>)
           })
         }

@@ -6,7 +6,7 @@ export default class ProductList extends Component {
     return (
       <div id="product-list">
         <header>
-          <strong>Product List (0 items)</strong>
+          <strong>Productdd List (0 items)</strong>
         </header>
         <table>
           <thead>
@@ -21,10 +21,15 @@ export default class ProductList extends Component {
           {this.props.products.map((item,index)=>{
             return(
               <tr key={index}>
-                <td hidden={this.props.columns.id}>{item.id}</td>
-                <td hidden={this.props.columns.name}>{item.name}</td>
-                <td hidden={this.props.columns.department}>{item.department}</td>
-                <td hidden={this.props.columns.price}>{item.price}</td>
+                {Object.keys(this.props.columns).map((column,index)=>{
+                  return(
+                    <td key={index}>
+                    {this.props.columns[column] ?
+                    item[column]:""
+                    }
+                    </td>
+                  )
+                })}
               </tr>
             );
           })}
